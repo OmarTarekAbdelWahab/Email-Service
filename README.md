@@ -1,4 +1,12 @@
 # Email-Service
-> A web-based email service.
-> An Angular and spring project.
-> Json Database is implemented.
+- A web-based email service.
+- An Angular and spring project.
+- Json Database is implemented.
+- User needs to register for the first time.
+- Users can send, receive, delete, restore, messeges, and save, remove them to a folder.
+- Multiple attachements can be attached to a messege.
+- Users can add and delete other users to contacts.
+- A draft section for unfinished messeges.
+- Users can change their username at any time.
+- Messeges can be assigned different priorities.
+- Messeges can be arranged according to differnet categories, like name, topic, date, sender, receiver, etc.
