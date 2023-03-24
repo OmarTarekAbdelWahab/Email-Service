@@ -1,0 +1,136 @@
+<body>
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+
+  />
+<div class="sidenav">
+  <button class="button" (click)="inbox()">Inbox</button>
+  <button class="button" (click)="send()">Send to</button>
+  <button class="button" (click)="contacts()">Contact</button>
+  <button class="button" (click)="draft()">Draft</button>
+  <button class="button" (click)="sent()">Sent Emails</button>
+  <button class="button" (click)="bin()">Bin</button>
+  <button class="button" (click)="search()">Search</button>
+  <button class="button2">My Folders</button>
+  <button class="button" (click)="profile()">My Profile</button>
+</div>
+<div class="main">
+  <div>
+    <label for="info">Rename Folder</label><br />
+    <input [(ngModel)]="newName" type="text" />
+  </div>
+  <div class="bottom">
+    <button class="add" (click)="renameFolder()">Rename</button>
+  </div>
+  <br />
+  <div>
+    <button style="background-color:white;cursor: pointer;"  (click)="folder()"><i class="material-icons" style="font-size:36px;background-color:white;font-weight: bold;">arrow_back</i></button>
+  </div>
+  <div class="pagination" id="pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+  <div *ngIf="messages.length != 0"></div>
+  <form
+    class="form"
+    *ngFor="
+      let message of this.messages
+        | paginate : { itemsPerPage: emailsperpage, currentPage: p }
+    "
+  >
+    <div id="emails">
+      <div id="sub">
+        <button
+          id="delete"
+          title="Delete From this Folder"
+          (click)="deleteMessage(message)"
+        >
+          <i class="material-icons">delete</i>
+        </button>
+        <br />
+        <span>Sent from:</span><span id="text">{{ message.sender }}</span>
+      </div>
+      <br />
+      <div id="sub">
+        <span>Sent for:</span><span id="text">{{ message.receiver }}</span>
+      </div>
+      <br />
+      <div id="sub">
+        <span>Date:</span> <span id="text">{{ message.date }}</span>
+      </div>
+      <br />
+      <br />
+      <div id="sub">
+        <span>Subject:</span><span id="text"> {{ message.subject }}</span>
+      </div>
+      <br />
+      <hr />
+      <div>
+        <h2>Context:</h2>
+        <textarea rows="3" cols="170">{{ message.context }}</textarea>
+      </div>
+      <button id="download" class="upload" (click)="upload(message)">
+        Show Attachments
+      </button>
+      <a id="att1" download href="{{ this.firstLink }}"
+        >Download Attachment<button
+          id="delete2"
+          title="Delete"
+          (click)="deleteAttachment('1', message, 'att1')"
+        >
+          <i class="material-icons">delete</i>
+        </button></a
+      >
+      <a id="att2" download href="{{ this.secondLink }}"
+        >Download Attachment<button
+          id="delete2"
+          title="Delete"
+          (click)="deleteAttachment('2', message, 'att2')"
+        >
+          <i class="material-icons">delete</i>
+        </button></a
+      >
+      <a id="att3" download href="{{ this.thirdLink }}"
+        >Download Attachment<button
+          id="delete2"
+          title="Delete"
+          (click)="deleteAttachment('3', message, 'att3')"
+        >
+          <i class="material-icons">delete</i>
+        </button></a
+      >
+      <a id="att4" download href="{{ this.fourthLink }}"
+        >Download Attachment<button
+          id="delete2"
+          title="Delete"
+          (click)="deleteAttachment('4', message, 'att4')"
+        >
+          <i class="material-icons">delete</i>
+        </button></a
+      >
+      <a id="att5" download href="{{ this.fifthLink }}"
+        >Download Attachment<button
+          id="delete2"
+          title="Delete"
+          (click)="deleteAttachment('5', message, 'att5')"
+        >
+          <i class="material-icons">delete</i>
+        </button></a
+      >
+      <a id="att6" download href="{{ this.sixthLink }}"
+        >Download Attachment<button
+          id="delete2"
+          title="Delete"
+          (click)="deleteAttachment('6', message, 'att6')"
+        >
+          <i class="material-icons">delete</i>
+        </button></a
+      >
+    </div>
+  </form>
+</div>
+</body>

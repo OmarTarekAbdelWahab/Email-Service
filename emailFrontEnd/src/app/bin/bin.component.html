@@ -1,0 +1,77 @@
+<body>
+<div>
+<div class="sidenav">
+  <button class="button" (click)="inbox()">Inbox</button>
+  <button class="button" (click)="send()">Send to</button>
+  <button class="button" (click)="contacts()">Contact</button>
+  <button class="button" (click)="draft()">Draft</button>
+  <button class="button" (click)="sent()">Sent Emails</button>
+  <button class="button2">Bin</button>
+  <button class="button" (click)="search()">Search</button>
+  <button class="button" (click)="folder()">My Folders</button>
+  <button class="button" (click)="profile()">My Profile</button>
+</div>
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<!-- Page content -->
+<div class="main">
+  <div class="pagination" id="pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+  <div *ngIf="sentDeletedMessages.length != 0"></div>
+  <form
+    class="form"
+    *ngFor="
+      let deletedMessage of this.deletedMessages
+        | paginate : { itemsPerPage: emailsperpage, currentPage: p }
+    "
+  >
+    <div id="emails">
+      <div id="sub">
+        <span>Sent from:</span
+        ><span id="text">{{ deletedMessage.sender }}</span>
+      </div>
+      <br />
+      <div id="sub">
+        <span>Sent for:</span
+        ><span id="text">{{ deletedMessage.receiver }}</span>
+      </div>
+      <br />
+      <div id="sub">
+        <span>Date:</span> <span id="text">{{ deletedMessage.date }}</span>
+      </div>
+      <br />
+      <div id="sub">
+        <span>Delete Date:</span>
+        <span id="text">{{ deletedMessage.sentDelete }}</span>
+      </div>
+      <br />
+      <div id="sub">
+        <span>Subject:</span
+        ><span id="text"> {{ deletedMessage.subject }}</span>
+      </div>
+      <br />
+      <hr />
+      <div>
+        <h2>Context:</h2>
+        <textarea rows="5" cols="170">{{ deletedMessage.context }}</textarea>
+      </div>
+      <button id="download"class="upload" (click) = "upload(deletedMessage)">Show Attachments</button>
+      <a id="att1"download href={{this.firstLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('1',deletedMessage,'att1')"><i class="material-icons" >delete</i></button></a>
+      <a id="att2"download href={{this.secondLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('2',deletedMessage,'att2')"><i class="material-icons" >delete</i></button></a>
+      <a id="att3"download href={{this.thirdLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('3',deletedMessage,'att3')"><i class="material-icons" >delete</i></button></a>
+      <a id="att4"download href={{this.fourthLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('4',deletedMessage,'att4')"><i class="material-icons" >delete</i></button></a>
+      <a id="att5"download href={{this.fifthLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('5',deletedMessage,'att5')"><i class="material-icons" >delete</i></button></a>
+      <a id="att6"download href={{this.sixthLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('6',deletedMessage,'att6')"><i class="material-icons" >delete</i></button></a>
+    </div>
+    
+    <button title="Restore" id="restore" (click)="restore(deletedMessage)">
+      <i class="material-icons">restore</i>
+    </button>
+    <button id="delete"title="Delete"(click)="permanentlyDelete(deletedMessage)"><i class="material-icons" >delete</i></button>
+  </form>
+</div>
+</div>
+</body>

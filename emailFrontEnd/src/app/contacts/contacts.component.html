@@ -1,0 +1,59 @@
+<body>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="sidenav">
+  <button class="button" (click)="inbox()">Inbox</button>
+  <button class="button" (click)="send()">Send to</button>
+  <button class="button2">Contact</button>
+  <button class="button" (click)="draft()">Draft</button>
+  <button class="button" (click)="sent()">Sent Emails</button>
+  <button class="button" (click)="bin()">Bin</button>
+  <button class="button" (click)="search()">Search</button>
+  <button class="button" (click)="folder()">My Folders</button>
+  <button class="button" (click)="profile()">My Profile</button>
+
+</div>
+
+<!-- Page content -->
+<div class="main">
+  <div>
+    <label for="contact">contact</label><br>
+    <input [(ngModel)]="contactName" type="text">
+  </div>
+
+  <div>
+    <label for="info">Email</label><br>
+    <textarea [(ngModel)]="contactEmail" type="text" cols="30" rows="1"></textarea>
+  </div>
+
+  <div class="bottom">
+    <button class="add" (click)="sendAdd()">Add contact</button>
+    <button style="margin-left: 80px;" class="add" (click)="getSortedContacts()">Sort A-Z</button>
+  </div>
+  <div style="color: brown;font-size: 15px;">{{ Status }}</div>
+
+
+  <form class="form" *ngFor="let contact of contacts">
+    <div id="contactFrame">
+      <div id="content">
+        <label style="font-size: 20px;"> Contact Name:</label>
+        <div id="name"> {{ contact.name }}</div>
+        <div *ngFor="let email of contact.emails">
+          <label style="font-size: 20px;"> Email: </label>
+          <button id="del" title="Delete this email" (click)="deleteEmail(email, contact.name)"><i
+              class="material-icons">delete</i></button>
+          <div id="email">{{ email }}</div>
+        </div>
+        <div><button (click)="edit()" id="edit1">Edit</button></div>
+        <div id="edit" *ngIf="this.editShow">
+            Add email to this contact:
+            <input id="t2" type="text" (keyup)="onKey($event)" />
+            <div><button id="add" (click)="addEmail(contact.name)">Add</button>
+              <button id="del" title="Delete this contact" (click)="deleteContact(contact.name)"><i
+                  class="material-icons">delete</i></button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div></body>

@@ -1,0 +1,21 @@
+
+<div class="container1">
+	<div class="container">
+		<h1 class="label">User Login</h1>
+		<form class="login_form" name="form">
+            <div class="font">First Name </div>
+			<input id="name1"autocomplete="off" type="text" name="name1">
+			<div id="name1_error" >Please fill up your First name</div>
+            <div class="font">Last Name </div>
+			<input id="name2"autocomplete="off" type="text" name="name2">
+			<div id="name2_error">Please fill up your Last name</div>
+			<div class="font">Email as 'user@mail.com'</div>
+			<input id="email"autocomplete="off" type="text" name="email">
+			<div id="email_error">Please fill up your Email </div>
+			<div class="font font2">Password minimum '5'</div>
+			<input id="password"type="password" name="password">
+			<div id="pass_error">Please fill up your Password</div>
+			<button  (click)="validated()"  type="submit">Sign up</button>
+		</form>
+	</div>	
+</div>

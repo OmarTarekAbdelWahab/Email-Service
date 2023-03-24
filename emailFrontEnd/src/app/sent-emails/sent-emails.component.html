@@ -1,0 +1,126 @@
+<body>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<button title="Refresh" id="refresh"(click)="refresh()"><i class="fa fa-refresh" style="font-size:35px;color:rgb(185, 180, 180)"></i></button>
+<header>
+  <button class="search" (click)="searchMessages()" > <i class="material-icons">search</i> </button>
+  <input type="text" class="search" placeholder = "Search..." [(ngModel)]="key">
+  <button class="filter"  (click)="toggle()"> <i class="material-icons">filter_list</i> </button>
+  <div class="filterAdvanced" #filter>
+    <input checked type="checkbox" name="check2"id="subject"ng-checked="true"(click)="onlyOne2('subject')"[(ngModel)]="searchSub" >
+    <label for="subject">Subject</label>
+    <br>
+    <input type="checkbox"name="check2" id="To"(click)="onlyOne2('To')" [(ngModel)]="searchTo">
+    <label for="subject">To</label>
+    <br>
+    <input type="checkbox"name="check2" id="body"(click)="onlyOne2('body')"[(ngModel)]="searchBody" >
+    <label for="body">Body</label>
+  </div>
+</header>
+<div class="toolbox">
+  <label style="font-size: 30px; color :#707070;">Sort </label>
+  <button class="sort"  (click)="toggle2()"> <i class="material-icons">filter_list</i> </button>
+  <div class="SortAdvanced" #sort>
+    <input ng-checked="true"  type="checkbox" id="prio"name="check" [(ngModel)]="Sortprio"(click)="onlyOne('prio')">
+    <label for="Priority">Low To High</label>
+    <br>
+    <input ng-checked="true"  type="checkbox" id="Revprio"name="check" [(ngModel)]="SortRevPrio"(click)="onlyOne('Revprio')">
+    <label for="Priority">High To Low</label>
+    <br>
+    <input type="checkbox" id="context" name="check"[(ngModel)]="Sortcon" (click)="onlyOne('context')">
+    <label for="Context">Context</label>
+    <br>
+    <input type="checkbox" id="subject"name="check"[(ngModel)]="Sortsub"(click)="onlyOne('subject')" >
+    <label for="subject">Subject</label>
+    <br>
+    <input type="checkbox" id="Recent"name="check" [(ngModel)]="Recent"(click)="onlyOne('Recent')">
+    <label for="Priority">Recent</label>
+  </div>
+  <button class="folder" id="folder"(click)="addtoFolder()" > <i class="material-icons">folder</i> </button>
+  <input type="text" class="folder" placeholder = "file name..."[(ngModel)]="folderName"name="something" >
+  <label id="fol">No folder By this Name</label>
+  <label id="fol2">Added to the folder</label>
+    <button id="delete"title="Delete"(click)="deleteEmail()"><i class="material-icons" >delete</i></button>
+</div>
+<div class="pagination" id="pagination">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+<div class="sidenav">
+  <button class="button" (click)="inbox()">Inbox</button>
+  <button class="button" (click)="send()">Send to</button>
+  <button class="button" (click)="contacts()">Contact</button>
+  <button class="button" (click)="draft()">Draft</button>
+  <button class="button2">Sent Emails</button>
+  <button class="button" (click)="bin()">Bin</button>
+  <button class="button" (click)="search()">Search</button>
+  <button class="button" (click)="folder()">My Folders</button>
+  <button class="button" (click)="profile()">My Profile</button>
+
+</div>
+
+<!-- Page content -->
+<div class="main">
+  <form class="form" *ngFor="let email of emails| paginate : { itemsPerPage: emailsperpage, currentPage: p }">
+    <div id="emails">
+      <input  type="checkbox" id="prio"name="check" (click)="select(email)">
+        <div (click)="on(email)" style="cursor: pointer;">
+        <div id="miniMessage">
+          
+        <span>Send For :</span><span id="text">{{ email.receiver }}</span>
+     
+    
+        <span style="margin-left: 40px;">Date:</span> <span id="text">{{ email.date }}</span>
+      
+      
+        <span style="margin-left: 40px;">Subject:</span><span id="text" >{{ email.subject }}</span>
+      
+        
+        <span style="margin-left: 40px;">Priority:</span> <span id="text" *ngIf="email.priority == '4'">Ver High Priority</span>
+        <span id="text" *ngIf="email.priority == '3'">High Priority</span>
+        <span id="text" *ngIf="email.priority == '2'">Medium Priority</span>
+        <span id="text" *ngIf="email.priority == '1'">Low Priority</span>
+    </div>
+  </div>
+    </div>
+    <div id="display" #myDisplay>
+      <div class="msg">
+        <div id="emails2">
+          <button id="off" (click)="off()"><i class="material-icons" style="font-size:30px;color:red">highlight_off</i></button>
+          <div id="sub1">
+            <span>Send For :</span><span id="text">{{ this.selectEmail.receiver }}</span>
+          </div>
+          <br />
+          <div id="sub">
+            <span>Date:</span> <span id="text">{{ this.selectEmail.date }}</span>
+          </div>
+          <br />
+          <div id="sub">
+            <span>Subject:</span><span id="text"> {{ this.selectEmail.subject }}</span>
+          </div>
+          <br />
+          <div id="sub">
+            <span>Priority:</span> <span id="text" *ngIf="email.priority == '4'">Ver High Priority</span>
+            <span id="text" *ngIf="this.selectEmail.priority == '3'">High Priority</span>
+            <span id="text" *ngIf="this.selectEmail.priority == '2'">Medium Priority</span>
+            <span id="text" *ngIf="this.selectEmail.priority == '1'">Low Priority</span>
+          </div>
+          <br />
+          <hr />
+          <div>
+            <h2>Context:</h2>
+            <textarea rows="3" cols="120">{{ this.selectEmail.context }}</textarea>
+          </div>
+          <button id="download"class="upload" (click) = "upload(this.selectEmail)">Show Attachments</button>
+        <a id="att1"download href={{this.firstLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('1',this.selectEmail,'att1')"><i class="material-icons" >delete</i></button></a>
+        <a id="att2"download href={{this.secondLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('2',this.selectEmail,'att2')"><i class="material-icons" >delete</i></button></a>
+        <a id="att3"download href={{this.thirdLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('3',this.selectEmail,'att3')"><i class="material-icons" >delete</i></button></a>
+        <a id="att4"download href={{this.fourthLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('4',this.selectEmail,'att4')"><i class="material-icons" >delete</i></button></a>
+        <a id="att5"download href={{this.fifthLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('5',this.selectEmail,'att5')"><i class="material-icons" >delete</i></button></a>
+        <a id="att6"download href={{this.sixthLink}}>Download Attachment<button id="delete2"title="Delete"(click)="deleteAttachment('6',this.selectEmail,'att6')"><i class="material-icons" >delete</i></button></a>
+        </div>
+        
+      </div>
+    </div>
+  </form>
+</div>
+</body>

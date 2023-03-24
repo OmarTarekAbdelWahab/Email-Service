@@ -1,0 +1,59 @@
+<body>
+<div class="sidenav">
+  <button class="button" (click)="inbox()">Inbox</button>
+  <button class="button2">Send to</button>
+  <button class="button" (click)="contacts()">Contact</button>
+  <button class="button" (click)="draft()">Draft</button>
+  <button class="button" (click)="sent()">Sent Emails</button>
+  <button class="button" (click)="bin()">Bin</button>
+  <button class="button" (click)="search()">Search</button>
+  <button class="button" (click)="folder()">My Folders</button>
+  <button class="button" (click)="profile()">My Profile</button>
+
+</div>
+<div class="main">
+  <div class="message">
+    <div id="front">
+      <div id="to">
+        <span>To:<span id="sh">-----</span></span>
+        <input
+          class="text2"
+          type="text"
+          id="text"
+          size="45"
+          [(ngModel)]="sendtoUser"
+        />
+      </div>
+      <br />
+      <div id="subject">
+        <span>subject:</span>
+        <input id="text2" type="text" size="45" [(ngModel)]="subject" />
+      </div>
+    </div>
+    <br />
+    <span>priority:</span>
+    <input id="4" type="radio" name="priority" value="4" />
+    <label id="lab">very High priority</label>
+    <input id="3" type="radio" name="priority" value="3" />
+    <label id="lab">High priority</label>
+    <input id="2" type="radio" name="priority" value="2" />
+    <label id="lab">Medium priority</label>
+    <input id="1" type="radio" name="priority" value="1" checked />
+    <label id="lab">Low priority</label>
+    <br />
+    <div id="context">
+      <h1>Context</h1>
+      <textarea id="in" type="text" rows="10" cols="130" [(ngModel)]="context">
+      </textarea>
+    </div>
+    <div id="sendcomp">
+      <button id="send" (click)="sendTo()">Send</button>
+      <span id="emailmessage1">This e-mail is not exist </span>
+      <span id="emailmessage2">send successfully </span>
+    </div>
+  </div>
+  <div class="attach">
+    <input type="file"id="inp" class="file" (change)= "attach($event)"  multiple="multiple">
+  </div>
+</div>
+</body>

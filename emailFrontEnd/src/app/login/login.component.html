@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body class="body">
+      <div class="container">
+        <h1 class="label">User Login</h1>
+        <form class="login_form" name="form">
+          <div class="font">Email as 'user@mail.com'</div>
+          <input autocomplete="off" id="email" type="text" name="email" />
+          <div id="email_error">Please fill up your Email</div>
+          <div class="font font2">Password minimum '5'</div>
+          <input type="password" id="password" name="password" />
+          <div id="pass_error">Please fill up your Password minimum '5'</div>
+          <button type="submit" (click)="validated()">Login</button>
+          <div class="font font2">Has no account</div>
+          <button (click)="signUp()" class="register">Register</button>
+        </form>
+      </div>
+  </body>
+</html>

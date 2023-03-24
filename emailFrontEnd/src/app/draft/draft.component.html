@@ -1,0 +1,46 @@
+<body>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="sidenav">
+  <button class="button" (click)="inbox()">Inbox</button>
+  <button class="button" (click)="send()">Send to</button>
+  <button class="button" (click)="contacts()">Contact</button>
+  <button class="button2">Draft</button>
+  <button class="button" (click)="sent()">Sent Emails</button>
+  <button class="button" (click)="bin()">Bin</button>
+  <button class="button" (click)="search()">Search</button>
+  <button class="button" (click)="folder()">My Folders</button>
+  <button class="button" (click)="profile()">My Profile</button>
+</div>
+<div class="main">
+  <form
+    class="form"
+    *ngFor="
+      let email of emails
+        | paginate : { itemsPerPage: emailsperpage, currentPage: p }
+    "
+  >
+    <div id="emails">
+      <div id="sub">
+        <span>Send for :</span><span id="text">{{ email.receiver }}</span>
+        
+      </div>
+      <br />
+      <div id="sub">
+        <span>Subject :</span><span id="text"> {{ email.subject }}</span>
+      </div>
+      <br />
+      <hr />
+      <div>
+        <h2>Context:</h2>
+        <textarea rows="6" cols="170">{{ email.context }}</textarea>
+      </div>
+    </div>
+    <button class="button" (click)="modifiy(email)">Modifiy</button>
+    <button id="delete"title="Delete"(click)="deleteDraft(email)"><i class="material-icons" >delete</i></button>
+  </form>
+  <div class="pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+</body>

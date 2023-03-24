@@ -1,0 +1,54 @@
+<body>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<header>
+  <button class="search"(click)="search()" > <i class="material-icons">search</i> </button>
+  <input type="text"[(ngModel)]="searchText" class="search" placeholder = "Search..." >
+  <button class="filter"  (click)="toggle()"> <i class="material-icons">filter_list</i> </button>
+  <div class="filterAdvanced" #filter>
+    <input checked type="checkbox" name="check2"id="subject"ng-checked="true"(click)="onlyOne2('subject')"[(ngModel)]="searchName" >
+    <label for="subject">Subject</label>
+    <br>
+    <input type="checkbox"name="check2" id="to" (click)="onlyOne2('to')"[(ngModel)]="searchEmail">
+    <label for="to">To</label>
+    <br>
+  </div>
+</header>
+
+
+<div class="sidenav">
+  <button class="button" (click)="inbox()">Inbox</button>
+  <button class="button" (click)="send()">Send to</button>
+  <button class="button" (click)="contacts()">Contact</button>
+  <button class="button" (click)="draft()">Draft</button>
+  <button class="button" (click)="sent()">Sent Emails</button>
+  <button class="button" (click)="bin()">Bin</button>
+  <button class="button2">Search</button>
+  <button class="button" (click)="folder()">My Folders</button>
+  <button class="button" (click)="profile()">My Profile</button>
+
+</div>
+
+<div class="main">
+  <div>
+    <div id="status">{{ status }}</div>
+    <div class="form" *ngFor="let searchedUser of searchedUsers">
+      <div id="contactFrame">
+      <div><h3>Email:</h3> <span>{{ searchedUser.email }}</span></div>
+      <div><h3>Name:</h3><span> {{ searchedUser.firstName }} {{ searchedUser.lastName }}</span></div>
+      <div><h3>Joined:</h3><span> {{ searchedUser.joinDate }}</span></div>
+      <div>
+        <button id="b1"(click)="addToExistingContact(searchedUser.email)">
+          add to existing contact
+        </button>
+      </div>
+      <div>
+        <button id="b1"(click)="addToNewContact(searchedUser.email)">
+          add to a new contact
+        </button>
+        <input type="text" [(ngModel)]="contactName" />
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</body>
